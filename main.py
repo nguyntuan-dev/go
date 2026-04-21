@@ -82,7 +82,7 @@ async def security_checks(request: Request, call_next):
     return response
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 # ✅ Serve frontend tại route "/"
@@ -224,4 +224,3 @@ def get_audio(request: Request, text: str):
 def convert_pinyin(request: Request, pinyin: str = Query("", description="Pinyin string (e.g. 'wo3 shi4 yi2 ge4 xue2 sheng1')")):
     """Convert pinyin to Chinese characters word by word."""
     return cedict.convert_pinyin_to_chinese(pinyin)
-
