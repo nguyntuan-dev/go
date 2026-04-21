@@ -16,7 +16,7 @@ from vietnamese import get_translation, preload_hsk_words
 
 CEDICT_URL = "https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz"
 HSK_DATA_URL = "https://raw.githubusercontent.com/drkameleon/complete-hsk-vocabulary/master/complete.json"
-DATA_DIR = Path(__file__).parent.parent / "data"
+DATA_DIR = Path(__file__).parent / "data"
 CEDICT_GZ = DATA_DIR / "cedict.txt.gz"
 CEDICT_TXT = DATA_DIR / "cedict.txt"
 HSK_DATA_FILE = DATA_DIR / "hsk_data.json"
@@ -166,6 +166,10 @@ class CedictDict:
     def load(self):
         """Download (if needed) and parse the dictionary."""
         self._load_hsk_data()
+        # Auto-download full HSK data nếu đang dùng fallback (hardcode ít từ)
+        if self.hsk_words is HSK_WORDS:
+            print("[hsk] Hardcoded fallback detected → auto-downloading full HSK data...")
+            self.download_hsk_data(preload=False)
         self._build_hsk_lookup()
         self._ensure_downloaded()
         self._parse()
