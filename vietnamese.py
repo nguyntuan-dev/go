@@ -8,7 +8,7 @@ import os
 import time
 from pathlib import Path
 
-CACHE_FILE = Path(__file__).parent.parent / "data" / "viet_cache.json"
+CACHE_FILE = Path(__file__).parent / "data" / "viet_cache.json"
 
 from viet_dict import VI
 
